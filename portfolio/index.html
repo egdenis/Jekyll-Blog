@@ -1,0 +1,12 @@
+---
+layout: portfolio
+---  
+    {% for post in site.posts %}
+        {% if post.layout == "portfolio"%}
+        <div class = "row content-container">
+            <div class="col-12">
+                <img src="/images/{{post.title}}.jpg">
+            </div>
+        </div>
+        {%endif%}
+    {% endfor %}

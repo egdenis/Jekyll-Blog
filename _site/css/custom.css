@@ -72,3 +72,41 @@ h2{
 .muted{
   font-weight: 100;
 }
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    text-align:left;
+    margin-right:-4px;
+}
+.circled{
+  border-radius: 50%;
+  border:1px solid black;
+  float:left;
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  margin: 5px
+}
+
+.circled .active{
+  border-color: orange;
+}
+.page-nav{
+  font-size: large;
+  font-weight: 100;
+  margin-top: auto;
+}
+.page-nav{
+  font-size: large;
+  font-weight: 100;
+  margin-top: auto;
+  border-color:orange;
+}
+
+a.page-nav:active{
+  text-decoration: none;
+}
