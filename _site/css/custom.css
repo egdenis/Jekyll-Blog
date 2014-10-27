@@ -1,0 +1,74 @@
+.navbar-default {
+    background:transparent;
+    border-bottom-style: dotted;
+    border-bottom-width: 0px;
+}
+.navbar h1 { 
+  font-weight: 800;
+  color:black;
+}
+
+.navbar h4 { 
+  font-weight: 300;
+  color:black;
+  border-bottom: 5px solid black;
+  padding-right: 55px;
+  padding-left: 5px;
+  transition-property: padding-left, padding-right,border-bottom;
+  transition-duration: .5s;
+}
+
+.navbar h4:hover { 
+  color:black;
+  border-bottom: 5px solid orange;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+
+
+.navbar-nav > li{
+  margin-right:30px;
+}
+
+.navbar button{
+
+  margin-bottom: 42px;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 900px; /* or 950px */
+}
+
+
+.sidebar-link h5{
+  color:black;
+  font-weight: 200;
+}
+
+.sidebar-link h5:hover{
+  color:black;
+  font-weight: 200;
+}
+
+.sidebar-container{
+  border:2px dotted rgb(245,245,245) ;
+  padding-left: 0px
+}
+
+.content-container{
+  margin-bottom: 20px;
+  margin-left: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(245,245,245)
+}
+
+h2{
+  margin-top: 0px;
+}
+
+.muted{
+  font-weight: 100;
+}

@@ -1,0 +1,10 @@
+name: "Egdenis"
+description: "A place where I write about things I do"
+
+url: “http://localhost:4000”
+
+paginate: 10
+
+markdown: rdiscount
+permalink: pretty
+highlighter: rouge
