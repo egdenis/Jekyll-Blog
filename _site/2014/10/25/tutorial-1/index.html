@@ -12,10 +12,10 @@
 
   <body>
 
-  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class = "container">
 
-        <a href="#" class = "navbar-brand"><h1>Egdenis<h1></a>
+        <a href="#" class = "navbar-brand"><h2>Egdenis<h2></a>
 
       <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse"> 
 
@@ -28,7 +28,7 @@
       <div class = "collapse navbar-collapse navHeaderCollapse">
         <ul class = "nav navbar-nav navbar-right">
           <li><a href="/index.html"><h4>blog</h4></a></li>
-          <li><a href="#"><h4>portfolio</h4></a></li>
+          <li><a href="/portfolio/index.html"><h4>portfolio</h4></a></li>
           <li><a href="#"><h4>contact</h4></a></li>
         </ul>
 
@@ -40,29 +40,81 @@
     <div class="container">
 <div class="row">
 
-    <div class="col-md-3 sidebar-container">
-        <div class = "sidebar">
-  <ul class="sidebar-link">
     
-      <li><a href="/2014/10/25/tutorial-1/"><h5>Consectetur Elit</h5></a></li>
-    
-      <li><a href="/2014/10/25/tutorial/"><h5>Amet Blogeroo</h5></a></li>
-    
-      <li><a href="/2014/10/25/blog/"><h5>Lorem Ipsum Dolor Sit Amet</h5></a></li>
-    
-  </ul>
-</div>
+
+    <div class="col-md-10 col-md-offset-1">
+      <h1 class="title">Consectetur Elit</h1>
+       <h5 class="muted title">25 October 2014</h5>
+      <p>The current project that we are working on with ehsan sam neils and I is a platform called game host which allows people to connect ai's to compete against each other in a variety of different games. We are currently working on the server side conection of the clients and have finished the code for the tictactoe game. I also intend to work on a personal blog that I will write in go and then use to post various projects that I have done. I also plan on finishing projects that I have been on and posting them on github. Below is a fractile generator that i finished this weekend.
+In middle school I had been captivated, as many others where at the time, by Minecraft. What struck me the first time that I had traveled its vast and actually infinite land masses was that it was random, and therefore created an awe inspiring and suspenseful experience for the player. My mind was always astonished by the seemingly "magical" geologic creations that happened within the game. In spite of my curiosity and the strong impression that the game left on me, it was not until this year that I actually decided to make my own terrain generator.</p>
+
+<p>After a quick search I had quickly found that I could use 2D midpoint  displacement to create such a terrain (square-diamond algorithm).</p>
+
+<p>Here is a quick pseudo for the algorithm:</p>
+
+<p>Figure 1: Diamond-Square Pseudo-Illustration</p>
+
+<p>The diamond step: Taking a square of four points, generate a random value at the
+square midpoint, where the two diagonals meet. The midpoint value is calculated by averaging the four corner values, plus a random amount. This gives you diamonds when you have multiple squares arranged in a grid.The square step: Taking each diamond of four points, generate a random value at the center of the diamond. Calculate the midpoint value by averaging the corner values, plus a random amount generated in the same range as used for the diamond step. This gives you squares again.</p>
+
+<p>The concept behind the algorithm however is rather simple. The idea is that for each square step you find a peak in the mountain no matter how subtle, and then for the diamond you are preparing the grid for the next recursive iteration. What is important to realize is that unlike a conventional midpoint displacement algorithm, a diamond-square algorithm will average the values four values that surround it during the diamond step. Just to be clear the diamond step will occur wether or not their are four points to average. If the four the two centers of the potential neighboring sectors are not included in the average then you will end up with a "square artifact" (each quadrant had a stark difference between each other creating squares with individual terrains within them). I had learned this the hard way because when I looked at the above diagram I could not see four points that surrounded the midpoint of an side edge, so I disregarded the 2 other points. This resulted in hours of frustration, and sub-par results. The solution to averaging the edge points can be to either just exclude it from the average, or add the center of the center on the opposite side. The later method can be more difficult to implement but will result in maps that wrap from side to side creating an interesting result. With the current implementation you must make the grid of a size 1 more than a power of 2 so 3, 5, 9 so on (you should have memorized them because of 2048).</p>
+
+<p>*It is also crucial decrease the "smoothness" value, or the range of random numbers to be added during each step in each entire iteration of the map. The purpose of doing so is to create a map that has gradual inclines rather than random dips and peaks. Anyways I doubt anyone would make that mistake as it is crucial to the algorithm (just double checking).</p>
+
+<p>After a few days I had a fully functional terrain generator with sea level and such (just sort the array of values and make the sea level the one at .4 of the total length). Yet I wasn't satisfied as my goal was to create a terrain generator that would create coherent and interesting islands and not one who would cut mountains short at the edge.</p>
+
+<p>Figure 2: result of original implementation</p>
+
+<p>Unsatisfied I went back to the web and researched other methods of generations but found that the problem was the same for other popular methods such as Perlin noise (which is what is used in Minecraft).</p>
+
+<p>Their are several advantages to Perlin noise which stem from the fact that it is a Pseudo-random number generator, by that I mean that if you plug in a unique x, y pair twice you will get the same result each time (individual values are not random either as the previous and next term will be coherent with the current on). The advantage with a Pseudo-random number generator such as Perlin noise is that maps can easily be created on the fly and don't even need to be stored because you will get the same result regardless thus explaining why Minecraft has 'infinite' maps.</p>
+
+<p>So, why would I not use Perlin noise to make an awesome island. Well, there are two reasons actually the first obvious one is that it won't fix the problem of creating an island and the second is that the advantages of a Perlin noise implementations are minimal if not inexistant for our purpose as a island is limited to the player and not infinite so there is no reason to spend time trying to implement Perlin (it's a great choice otherwise though).</p>
+
+<p>Back to the problem then. After even  more searching I found a great example of a randomly generated island algorithm which provided an intresting solution to the problem. By using a sort of snowball pattern you can create an island filter(here's the link http://www.nolithius.com/game-development/world-generation-breakdown). Here is the pseudo:</p>
+
+<p>Start with a blank map, all 0s.
+Pick a random starting spot for the particle. Increment the value on the map by 1 where the particle is located.
+Move the particle to a random adjacent position whose value is less than or equal to the current position (imagine the particle rolling downhill).
+Repeat the last 2 steps as long as the particle is alive.
+Repeat for a large number of particles.</p>
+
+<p>Eventually you end up with something that looks like this:</p>
+
+<p>Rolling Particle algorithm, center-biased, particles start 12 tiles away from the edges. Click to view demo.
+Figure 3: Result of particle rolling with 3000 iterations and a life of 50</p>
+
+<p>Then by normalizing all the values to a range of 0-1 we end up with a sort of island filter which can be used to bias our terrain generation into creating an island, yet I found that this was a flawed system for two reason the first is that it only worked 50% of the time (I may have badly implemented it and could have magnified its effect to make it more of the base rather than the filter) and resulted in very poor results when used at a larger scale as the number of particles increases exponentially with size of the grid so it becomes computationally expensive and even incapabale of handling maps larger than 1025x1025. The two issues are illustrated below:</p>
+
+<p>Figure 4: result of rolling 300,000 particles on a 1025x1025 map</p>
+
+<p>Figure 5: result of rolling 3000 particles on a 129x129 map</p>
+
+<p>As illustrated by the above images the implementation was problematic and not scalable. Looking back I know realize that I could simply have magnified the map with cubic or cosine interpolation or scaled the filter by a sufficient amount but that was not what I chose to do.</p>
+
+<p>Instead I decided that I should not try to add a filter to create an island due to the added processing time and difficulties related to the task but rather seed the values that are to be covered with water with a value far below what I would randomly seed other quadrants to ensure that it is below sea level. This would require modifications to the current algorithm though, as instead of seeding each corner we seed 81 smaller squares (you can subdivide as you wish as long as it is the square of 1 more than a power of 2 and is smaller than the map size you which to make) to either 0 if they are on an edge or 3 away from one or the smooth range * random plus. In the end this returns an island terrain every time because it is ensured to be surrounded with water due to the selective seeding. It has seamless transitions between the 81 sub divisions too as it always shares a side with a neighbor. Here is the result:</p>
+
+<p>Figure 6: Result of selective seeding on square diamond generation</p>
+
+<p>The result shown above is exactly what we were looking for and we did it without any extra computations (actually less because we seeded a whole layer are selves!). Yet you can continue beyond by using flood fill to eliminate undesired "mini islands" and then use a cubic interpolation to make sloped more realistic (Figure 2, and 4-6 are all topographic maps in case you are confused, might be a bit late to say so :/). Then to create a more geologically correct map and simply more interesting one we can simulate a wind flow using another plasma mask which can then be used to determine rain and rain shadows and further to determine the placements of lakes, rivers, and biomes.</p>
+
+      <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'egdenis'; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
 
-    <div class="col-md-9 ">
-      <h2>Consectetur Elit</h2>
-       <h5 class="muted">25 October 2014</h5>
-      <p>Sed id lacus eu urna ullamcorper mattis. Etiam ut nunc erat. Sed et velit ac nisi mattis mollis tempus id nulla. In varius fermentum posuere. Vivamus suscipit accumsan arcu ac ullamcorper. Aliquam adipiscing, ante non eleifend blandit, nunc diam vulputate augue, eu convallis lorem lacus in lacus. Curabitur ultricies ultrices diam, vel tincidunt dui rhoncus a. Vivamus at sapien in turpis consequat pharetra sit amet quis elit.</p>
-
-<p>Donec at arcu nisi, quis euismod enim. Donec viverra felis vitae elit ornare porta. Vivamus ullamcorper consectetur odio, vitae imperdiet mi laoreet vitae. Fusce ante ligula, cursus eget volutpat vel, pretium eget tellus.</p>
-
-    </div>
 </div>
+
     </div>
 
   </body>

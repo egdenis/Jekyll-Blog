@@ -1,11 +1,30 @@
-.navbar-default {
-    background:transparent;
-    border-bottom-style: dotted;
-    border-bottom-width: 0px;
+body{
+  padding-top: 150px;
 }
-.navbar h1 { 
-  font-weight: 800;
+
+a{
   color:black;
+}
+
+a:hover{
+  color:orange;
+}
+.navbar-default {
+    background:white;
+    border-bottom:1px dotted rgb(220,220,220);
+}
+h2 { 
+  font-size:2.2em;
+  font-weight: 800;
+  color: black;
+  margin: 0px;
+}
+
+h1{
+  font-size:3em;
+  font-weight: 900;
+  color:black;
+  margin: 0px;
 }
 
 .navbar h4 { 
@@ -42,7 +61,10 @@
   max-width: 900px; /* or 950px */
 }
 
+.sidebar{ 
 
+  position: fixed;
+}
 .sidebar-link h5{
   color:black;
   font-weight: 200;
@@ -53,20 +75,11 @@
   font-weight: 200;
 }
 
-.sidebar-container{
-  border:2px dotted rgb(245,245,245) ;
-  padding-left: 0px
-}
-
 .content-container{
   margin-bottom: 20px;
   margin-left: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgb(245,245,245)
-}
-
-h2{
-  margin-top: 0px;
 }
 
 .muted{
@@ -92,21 +105,58 @@ h2{
   margin: 5px
 }
 
-.circled .active{
-  border-color: orange;
-}
 .page-nav{
   font-size: large;
   font-weight: 100;
   margin-top: auto;
-}
-.page-nav{
-  font-size: large;
-  font-weight: 100;
-  margin-top: auto;
-  border-color:orange;
 }
 
-a.page-nav:active{
-  text-decoration: none;
+.portfolio-img{
+  width: 270px;
+  height: auto;
+  clip: rect();
+  border-radius: 50%;
+  border:1px solid #B8B8B8;
+  z-index: 1;
 }
+
+.portfolio-grid{
+  text-align: center;
+}
+
+.portfolio-grid-cell{
+  margin-bottom:10px;
+  margin-top: 20px;
+}
+
+.project-info{
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width:270px;
+  height:270px;
+  border-radius:50%;
+  font-size:20px;
+  color:rgba(0,0,0,.0);
+  font-size: 2em;
+  font-weight: 900;
+  line-height:270px;
+  text-align:center;
+  background:rgba(255,255,255,.2);
+  transition-property: background, color;
+  transition-duration: 1s;
+}
+
+.project-info:hover{
+  color:#fff;
+  background:rgba(255,165,0,.9);
+}
+
+.read-more {
+  font-weight: 300;
+}
+
+.title{
+  text-align: center;
+}
+

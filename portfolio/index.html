@@ -1,12 +1,16 @@
 ---
-layout: portfolio
----  
-    {% for post in site.posts %}
-        {% if post.layout == "portfolio"%}
+layout: portfolio-page
+---
+    {%assign projects = (site.posts | where: "layout", "portfolio"%}
+    
         <div class = "row content-container">
-            <div class="col-12">
-                <img src="/images/{{post.title}}.jpg">
+            <div class="col-12 portfolio-grid">
+                <h1>Portfolio</h1>
+                {% for post in projects %}
+                    <div class="col-sm-4 portfolio-grid-cell">                
+                        <img class = "portfolio-img" src="/img/{{post.title|downcase|replace: " ","-"}}.png">
+                        <a href="{{post.url}}"><div class="container project-info">{{post.title}}</div></a>
+                    </div>
+                {% endfor %}
             </div>
         </div>
-        {%endif%}
-    {% endfor %}
