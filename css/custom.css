@@ -1,5 +1,5 @@
 body{
-  padding-top: 150px;
+  padding-top: 110px;
 }
 
 a{
@@ -21,7 +21,7 @@ h2 {
 }
 
 h1{
-  font-size:3em;
+  font-size:4em;
   font-weight: 900;
   color:black;
   margin: 0px;
@@ -89,6 +89,7 @@ h1{
 .row-centered {
     text-align:center;
 }
+
 .col-centered {
     display:inline-block;
     float:none;
@@ -114,7 +115,6 @@ h1{
 .portfolio-img{
   width: 270px;
   height: auto;
-  clip: rect();
   border-radius: 50%;
   border:1px solid #B8B8B8;
   z-index: 1;
@@ -160,3 +160,33 @@ h1{
   text-align: center;
 }
 
+.header-img{
+  width: 100%;
+  height:auto;
+}
+
+.crop-box{
+  width: 100%;
+  height:400px;
+  overflow: hidden;
+}
+
+#contact-img{
+  width: 400px;
+  height: auto;
+}
+
+.contact-glyphicon{
+  height: 90px;
+  width: auto;
+  display:inline;
+  margin:0px 15px;
+}
+
+.center{
+  width: 50%;
+  height: 50%;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}

@@ -1,18 +1,16 @@
 {% include header.html %}
 <div class="row">
-
-    
-
     <div class="col-md-10 col-md-offset-1">
       <h1 class="title"> {{page.title}}</h1>
        <h5 class="muted title">{{ page.date | date: "%d %B %Y" }}</h5>
+       <div class="crop-box">
+          <img src="/img/header-img/{{page.title|downcase|replace: " ","-"}}.png" class = "header-img">
+       </div>
       {{ content }}
+
       <div id="disqus_thread"></div>
         <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = 'egdenis'; // required: replace example with your forum shortname
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
+            var disqus_shortname = 'egdenis';
             (function() {
                 var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
                 dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
